@@ -28,9 +28,9 @@ _checkAccel = ( e )->
   for i in [ 0...3 ]
     if abs( e.acceleration[ param[ i ] ] ) > 50
       alert "start"
-      @dispatch "START"
+      @dispatch "START". this
     else if abs( e.acceleration[ param[ i ] ] ) > 15
-      @dispatch "WALK"
+      @dispatch "WALK", this
 
 getInstance = ->
   if !instance

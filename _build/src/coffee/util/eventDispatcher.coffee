@@ -11,6 +11,6 @@ class EventDispatcher
   dispatch: ( eventName, opt_this, arg... )->
     if @listeners[ eventName ]
       for listener in @listeners[ eventName ]
-        listener.apply opt_this || @, arg
+        listener.apply opt_this || this, arg
 
 module.exports = EventDispatcher

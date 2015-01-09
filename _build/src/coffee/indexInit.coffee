@@ -13,7 +13,8 @@ indexInit = ->
 
   # milkcocoa LISTENER
   dartsDataStore.on "push", ( e )->
-    if e.value.message == "init" && user_id == e.value.user_id
+    if e.value.message == "init" && parseInt(
+      e.value.user_id ) == parseInt( user_id )
       $( ".qrCode_container" ).animate
         opacity: 0
       , 300, -> $( ".qrCode_container" ).hide()

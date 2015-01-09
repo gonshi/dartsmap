@@ -23,6 +23,7 @@ spInit = ->
       message: "walk"
 
   deviceParam.listen "ROTATE", ( heading )->
+    alert 1
     dartsDataStore.push
       user_id: user_id
       message : "rotate"

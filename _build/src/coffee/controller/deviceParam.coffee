@@ -26,8 +26,8 @@ param = [ "x", "y", "z" ]
 abs = Math.abs
 _checkAccel = ( e )->
   for i in [ 0...3 ]
-    alert abs( e.acceleration[ param[ i ] ] )
     if abs( e.acceleration[ param[ i ] ] ) > 50
+      alert "start"
       @dispatch "START"
     else if abs( e.acceleration[ param[ i ] ] ) > 15
       @dispatch "WALK"

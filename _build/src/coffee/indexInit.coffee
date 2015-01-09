@@ -20,7 +20,7 @@ indexInit = ->
       , 300, -> $( ".qrCode_container" ).hide()
 
       dartsDataStore.on "push", ( e )->
-        console.log e
+        console.log e.value.message
         if e.value.message == "start"
           return if is_started
           is_started = true

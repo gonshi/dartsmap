@@ -5,7 +5,7 @@ class PanoramaManager extends EventDispatcher
   constructor: ->
     super()
     @sv = new window.google.maps.StreetViewService()
-    @panoramaOptions =
+    panoramaOptions =
       clickToGo: false
       addressControl: false
       linksControl: false
@@ -21,32 +21,32 @@ class PanoramaManager extends EventDispatcher
     _pitch    = param.pitch || 0 # current pitch
     gap = 0.0001
 
-    panorama.setVisible false
+    @panorama.setVisible false
     if param.latLng
-      sv.getPanoramaByLocation( param.latLng,
+      @sv.getPanoramaByLocation( param.latLng,
           50, # radius to find sv
           _processSVData )
     else if param.panoId
-      sv.getPanoramaById param.panoId, _processSVData
+      @sv.getPanoramaById param.panoId, _processSVData
 
     _processSVData = ( data, status )->
       return if ( status != global.google.maps.StreetViewStatus.OK )
-      panorama.setPano data.location.pano
-      panorama.setPov
+      @panorama.setPano data.location.pano
+      @panorama.setPov
         heading: _heading,  # horizon rotation
         pitch: _pitch     # vertical rotation
 
       # streetView rendering bug fix
       clearInterval interval
       interval = setInterval ->
-        panorama.setPov
-          heading: panorama.getPov().heading, # horizon rotation
-          pitch: panorama.getPov().pitch + gap  # vertical rotation
+        @panorama.setPov
+          heading: @panorama.getPov().heading, # horizon rotation
+          pitch: @panorama.getPov().pitch + gap  # vertical rotation
         gap = gap * -1
       , 1000
 
       setTimeout ->
-        panorama.setVisible true # panorama fragment bug fix
+        @panorama.setVisible true # panorama fragment bug fix
       , 200
 
   setRotate: ( target_heading )->
@@ -56,12 +56,12 @@ class PanoramaManager extends EventDispatcher
     else if target_heading < -180
       target_heading = target_heading + 360
 
-    panorama.setPov
+    @panorama.setPov
       heading: target_heading
       pitch: 0
 
   rotateTo: ( target_heading, target_pitch )->
-    current_pov = panorama.getPov()
+    current_pov = @panorama.getPov()
     DURATION = 50
     multiVal = 10
     i = 0
@@ -100,7 +100,7 @@ class PanoramaManager extends EventDispatcher
         next_pitch = target_pitch
         fin_count += 1
 
-      panorama.setPov
+      @panorama.setPov
         heading: next_heading
         pitch: next_pitch
 
@@ -113,15 +113,15 @@ class PanoramaManager extends EventDispatcher
     timeout()
 
   remove: ->
-    panorama.setVisible false
+    @panorama.setVisible false
 
   get: ( param )->
     switch ( param )
       when "links"
-        data = panorama.getLinks()
+        data = @panorama.getLinks()
         break
       when "pov"
-        data = panorama.getPov()
+        data = @panorama.getPov()
         break
     return data
 

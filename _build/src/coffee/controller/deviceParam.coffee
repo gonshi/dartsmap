@@ -30,7 +30,7 @@ class DeviceParam extends EventDispatcher
     _checkAccel = ( e )=>
       for i in [ 0...3 ]
         if abs( e.acceleration[ param[ i ] ] ) > 50
-          @dispatch "START". this
+          @dispatch "START", this
         else if abs( e.acceleration[ param[ i ] ] ) > 15
           @dispatch "WALK", this
 

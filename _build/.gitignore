@@ -1,0 +1,7 @@
+# Ignore front develop-files
+node_modules
+.sass-cache
+bower_components
+src/css
+.tmp
+api_server/access_logs.db

@@ -1,0 +1,25 @@
+=bg($img, $size: contain, $repeat: no-repeat, $position: center )
+  background: image-url($img) $repeat $position 
+  background-size: $size
+
+=image-size($name, $pixel: $pixelRatio)
+  width: image-width($name) / $pixel
+  height: image-height($name) / $pixel
+
+  img
+    width: 100%
+
+=image-txt( $img )
+  +image-size( $img )
+  +bg( $img )
+  @extend %hideText
+
+=trbl( $top: auto, $right: auto, $bottom: auto, $left:auto )
+  @if $top != auto
+    top: $top
+  @if $right != auto
+    right: $right
+  @if $bottom != auto
+    bottom: $bottom
+  @if $left != auto
+    left: $left

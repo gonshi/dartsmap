@@ -1,0 +1,9 @@
+{
+  "proxy": {
+    "server": "",
+    "default": false
+  },
+  "routes": [
+    "/api/users/:id"
+  ]
+}

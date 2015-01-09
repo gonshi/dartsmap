@@ -1,0 +1,17 @@
+%hideText
+  overflow: hidden
+
+  &:before
+    display: block
+    width: 0
+    height: 100%
+    content: ""
+
+%hoverEffect
+  +transition( opacity 0.3s ease 0s )
+  &:hover
+    opacity: 0.8
+
+%activeEffect
+  &:active
+    opacity: 0.6

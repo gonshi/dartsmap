@@ -1,0 +1,42 @@
+////////////////////////////////////////
+// CSS Sprite
+////////////////////////////////////////
+
+// $name: sprite file name
+// $sprites: sprite-map
+// $block: display type
+// $device-pixel-ratio: if use Retina-image, it should 2 and original-image-size is x2.
+// $sprites-image: sprite-url($sprite) ;for optimize compile
+
+// generate sprite
+//
+  $sprite: sprite-map("src", $spacing:5px, $layout:horizontal)
+  $sprite-img: sprite-url($sprite)
+
+=sprite-bg-size($name, $sprites, $device-pixel-ratio: $pixelRatio)
+  $_w: image-width(sprite-file($sprites, $name)) / $device-pixel-ratio
+  $_h: image-height(sprite-file($sprites, $name)) / $device-pixel-ratio
+  width: $_w
+  height: $_h
+  background-size: auto $_h 
+
+=sprite-bg-position($name, $sprites, $device-pixel-ratio: $pixelRatio)
+  $_pos: sprite-position($sprites, $name)
+  $_x: round(nth($_pos, 1) / $device-pixel-ratio)
+  $_y: round(nth($_pos, 2) / $device-pixel-ratio)
+  background-position: $_x $_y
+
+=sprite-bg-image($sprites, $sprites-image, $display: block)
+  display: $display
+  background-image: $sprites-image
+  background-repeat: no-repeat
+
+// manager
+=sprite-bg($name, $sprites, $sprites-image, $display: block, $device-pixel-ratio: $pixelRatio)
+  +sprite-bg-image($sprites, $sprites-image, $display)
+  +sprite-bg-position($name, $sprites, $device-pixel-ratio)
+  +sprite-bg-size($name, $sprites, $device-pixel-ratio)
+
+=sprite-bg-base($name, $sprites, $sprites-image, $display: block, $device-pixel-ratio: $pixelRatio)
+  +sprite-bg-image($sprites, $sprites-image, $display)
+  +sprite-bg-size($name, $sprites, $device-pixel-ratio)

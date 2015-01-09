@@ -1,0 +1,19 @@
+.wrapper-panorama
+  #panorama
+    min-height: $minHeight
+    position: absolute
+    +trbl( 0, 0, 0, 0 )
+
+  .walk
+    $img: "walk.png" 
+    $num: 2
+    $height: image-height($img) / $num
+    position: absolute
+    +trbl( auto, 0, 20px, 0 )
+    width: image-width($img)
+    height: $height 
+    margin: auto
+    background-image: image-url($img)
+
+    &.alt
+      background-position: 0 -$height

@@ -1,0 +1,23 @@
+{
+  "node": true,
+  "strict": true,
+  "indent": 4,
+  "unused": true,
+  "undef": true,
+  "browser": true,
+  "devel": true,
+  "debug": true,
+  "globals": {
+    "_"         : true,
+    "$"         : true,
+    "jQuery"    : true,
+    "describe"  : true,
+    "it"        : true,
+    "expect"    : true,
+    "sinon"     : true,
+    "beforeEach": true,
+    "afterEach" : true,
+    "DEBUG" : true,
+    "namespace" : true
+  }
+}

@@ -9,9 +9,15 @@ panoramaInit = ->
   is_walking = false
   nearestLink = {}
 
+  # get ID
+  query = window.location.search.substring 1
+  element = query.split "="
+  user_id = decodeURIComponent element[ 1 ]
+
   # milkcocoa LISTENER
   ## forward
   dartsDataStore.on "push", ( e )->
+    return if e.value.user_id != user_id
     if e.value.message = "walk"
       _moveForward()
     else if e.value.message == "rotate"

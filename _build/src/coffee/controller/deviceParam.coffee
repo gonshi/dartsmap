@@ -8,6 +8,8 @@ class DeviceParam extends EventDispatcher
 
   exec: ->
     throttle = new Throttle 100
+    param = [ "x", "y", "z" ]
+    abs = Math.abs
 
     # LISTENER
     window.addEventListener "devicemotion", ( e )->
@@ -22,15 +24,15 @@ class DeviceParam extends EventDispatcher
         heading += window.orientation
         @dispatch "ROTATE", this, -heading
 
-param = [ "x", "y", "z" ]
-abs = Math.abs
-_checkAccel = ( e )->
-  for i in [ 0...3 ]
-    if abs( e.acceleration[ param[ i ] ] ) > 50
-      alert "start"
-      @dispatch "START". this
-    else if abs( e.acceleration[ param[ i ] ] ) > 15
-      @dispatch "WALK", this
+    ###
+      PRIVATE
+    ###
+    _checkAccel = ( e )=>
+      for i in [ 0...3 ]
+        if abs( e.acceleration[ param[ i ] ] ) > 50
+          @dispatch "START". this
+        else if abs( e.acceleration[ param[ i ] ] ) > 15
+          @dispatch "WALK", this
 
 getInstance = ->
   if !instance

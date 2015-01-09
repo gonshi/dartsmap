@@ -22,7 +22,9 @@ indexInit = ->
       dartsDataStore.on "push", ( e )->
         console.log e.value.message
         if e.value.message == "start"
-          return if is_started
+          if is_started || parseInt( e.value.user_id ) == parseInt( user_id )
+            return
+
           is_started = true
           target_top = $( ".map .goal" ).offset().top
           target_left = $( ".map .goal" ).offset().left - 200

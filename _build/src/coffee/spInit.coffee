@@ -31,10 +31,8 @@ spInit = ->
   # INIT
   deviceParam.exec()
 
-  setInterval ->
-    dartsDataStore.push
-      user_id: id
-      message: "init"
-  , 1000
+  dartsDataStore.push
+    user_id: id
+    message: "init"
 
 module.exports = spInit

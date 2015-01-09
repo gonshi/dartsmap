@@ -8,6 +8,7 @@ panoramaInit = ->
   last_heading = 0
   is_walking = false
   nearestLink = {}
+  param = {}
 
   # get ID
   query = window.location.search.substring 1

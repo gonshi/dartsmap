@@ -1,4 +1,5 @@
 EventDispatcher = require "../util/eventDispatcher"
+Throttle = require "../util/throttle"
 instace = null
   
 class DeviceParam extends EventDispatcher
@@ -6,9 +7,7 @@ class DeviceParam extends EventDispatcher
     super()
 
   exec: ->
-    throttle = new ns.Throttle 100
-    abs = Math.abs
-    param = [ "x", "y", "z" ]
+    throttle = new Throttle 100
 
     # LISTENER
     window.addEventListener "devicemotion", ( e )->
@@ -23,6 +22,8 @@ class DeviceParam extends EventDispatcher
         heading += window.orientation
         @dispatch "ROTATE", this, -heading
 
+param = [ "x", "y", "z" ]
+abs = Math.abs
 _checkAccel = ( e )->
   for i in [ 0...3 ]
     if abs( e.acceleration[ param[ i ] ] ) > 50

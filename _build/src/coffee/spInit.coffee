@@ -14,25 +14,27 @@ spInit = ->
   # EVENT LISTENER
   deviceParam.listen "START", ->
     dartsDataStore.push
-      id: id
+      user_id: id
       message: "start"
 
   deviceParam.listen "WALK", ->
     dartsDataStore.push
-      id: id
+      user_id: id
       message: "walk"
 
   deviceParam.listen "ROTATE", ( heading )->
     dartsDataStore.push
-      id: id
+      user_id: id
       message : "rotate"
       heading: heading
 
   # INIT
   deviceParam.exec()
 
-  dartsDataStore.push
-    id: id
-    message: "init"
+  setInterval ->
+    dartsDataStore.push
+      user_id: id
+      message: "init"
+  , 1000
 
 module.exports = spInit

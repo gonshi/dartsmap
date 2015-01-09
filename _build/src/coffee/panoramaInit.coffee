@@ -38,8 +38,10 @@ panoramaInit = ->
       is_walking = false
     , 1000
 
-  # INIT
-  ## read panorama location
+  ###
+    INIT
+  ###
+  # read panorama location
   query = window.location.search.substring 1 # remove "?"
   _param = query.split "&"
   if _param.length > 1
@@ -52,9 +54,9 @@ panoramaInit = ->
     window.location.href = "./"
 
   panoramaManager.draw
-    latLng  : new window.google.maps.LatLng param.lat, param.lng
-    heading : 270
-    pitch   : 0
+    latLng: new window.google.maps.LatLng param.lat, param.lng
+    heading: 270
+    pitch: 0
 
   # PRIVATE
   _moveForward = ->

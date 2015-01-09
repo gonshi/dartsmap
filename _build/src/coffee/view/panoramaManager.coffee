@@ -21,16 +21,11 @@ class PanoramaManager extends EventDispatcher
     _pitch    = param.pitch || 0 # current pitch
     gap = 0.0001
 
-    @panorama.setVisible false
-    if param.latLng
-      @sv.getPanoramaByLocation( param.latLng,
-          50, # radius to find sv
-          _processSVData )
-    else if param.panoId
-      @sv.getPanoramaById param.panoId, _processSVData
-
-    _processSVData = ( data, status )->
-      return if ( status != global.google.maps.StreetViewStatus.OK )
+    ###
+      PRIVATE
+    ###
+    _processSVData = ( data, status )=>
+      return if ( status != window.google.maps.StreetViewStatus.OK )
       @panorama.setPano data.location.pano
       @panorama.setPov
         heading: _heading,  # horizon rotation
@@ -38,16 +33,27 @@ class PanoramaManager extends EventDispatcher
 
       # streetView rendering bug fix
       clearInterval interval
-      interval = setInterval ->
+      interval = setInterval =>
         @panorama.setPov
           heading: @panorama.getPov().heading, # horizon rotation
           pitch: @panorama.getPov().pitch + gap  # vertical rotation
         gap = gap * -1
       , 1000
 
-      setTimeout ->
+      setTimeout =>
         @panorama.setVisible true # panorama fragment bug fix
       , 200
+
+    ###
+      INIT
+    ###
+    @panorama.setVisible false
+    if param.latLng
+      @sv.getPanoramaByLocation( param.latLng,
+          50, # radius to find sv
+          _processSVData )
+    else if param.panoId
+      @sv.getPanoramaById param.panoId, _processSVData
 
   setRotate: ( target_heading )->
     # convert to -180 ~ 180

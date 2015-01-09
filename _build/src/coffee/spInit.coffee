@@ -13,6 +13,7 @@ spInit = ->
   
   # EVENT LISTENER
   deviceParam.listen "START", ->
+    alert 1
     dartsDataStore.push
       user_id: user_id
       message: "start"

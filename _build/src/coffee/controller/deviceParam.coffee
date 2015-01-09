@@ -5,6 +5,7 @@ instace = null
 class DeviceParam extends EventDispatcher
   constructor: ->
     super()
+    @last_heading = 0
 
   exec: ->
     throttle = new Throttle 100
@@ -22,7 +23,10 @@ class DeviceParam extends EventDispatcher
         if heading < 0
           heading += 360
         heading += window.orientation
-        @dispatch "ROTATE", this, -heading
+
+        if abs( heading - @last_heading ) > 20
+          @last_heading = heading
+          @dispatch "ROTATE", this, -heading
 
     ###
       PRIVATE
@@ -31,7 +35,7 @@ class DeviceParam extends EventDispatcher
       for i in [ 0...3 ]
         if abs( e.acceleration[ param[ i ] ] ) > 50
           @dispatch "START", this
-        else if abs( e.acceleration[ param[ i ] ] ) > 15
+        if abs( e.acceleration[ param[ i ] ] ) > 25
           @dispatch "WALK", this
 
 getInstance = ->

@@ -40,7 +40,7 @@ indexInit = ->
           window.location.href = "panorama.html?lat=21.273006&lng=-157.8236413"
         , 5000
     else if e.value.message == "init"
-      console.log e.value.id
+      console.log e.value.user_id
 
   # INIT
   $arrow.css

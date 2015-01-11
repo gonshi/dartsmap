@@ -63,6 +63,20 @@
     &.throw
       background-position: 0 (-$height) 
 
+    .tutorial
+      display: none
+      $img: "tutorial/0.png"
+      position: absolute
+      +trbl(-80px, auto, auto, 210px)
+      +image-size($img)
+      +transform-origin(bottom, left)
+
+      &.show
+        display: block
+        +animation(scaleIn 0.4s $easeOutBack 0s)
+      &.hide
+        +animation(hide 0.4s ease 0s forwards)
+
     // for anchor position
     .start
       position: absolute
@@ -85,6 +99,7 @@
     qr code
   /*-----------------
   .qrCode_container
+    display: none
     position: fixed
     +trbl(0, 0, 0, 0)
     background: rgba(0, 0, 0, 0.8)
@@ -110,17 +125,21 @@
       background: #fff
       border-radius: 10px
 
+  .copyright
+    position: fixed
+    +trbl(auto, 20px, 20px, auto)
+
 .wrapper-sp
   display: none
   position: absolute
   +trbl(0, 0, 0, 0)
-  width: 100vw
+  width: 640px 
   height: 100vh
 
   .notice
     display: table-cell
-    width: 100vw
+    width: 640px 
     height: 100vh
-    font-size: 56px 
+    font-size: 36px 
     text-align: center
     vertical-align: middle 

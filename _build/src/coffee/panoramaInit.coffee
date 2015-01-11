@@ -34,26 +34,8 @@ panoramaInit = ->
     , 1000
 
   ###
-    INIT
+    PRIVATE
   ###
-  # read panorama location
-  query = window.location.search.substring 1 # remove "?"
-  _param = query.split "&"
-  if _param.length > 1
-    for i in [ 0..._param.length ]
-      element = _param[ i ].split "="
-      key = decodeURIComponent element[ 0 ]
-      value = decodeURIComponent element[ 1 ]
-      param[ key ] = value
-  else
-    window.location.href = "./"
-
-  panoramaManager.draw
-    latLng: new window.google.maps.LatLng param.lat, param.lng
-    heading: 270
-    pitch: 0
-
-  # PRIVATE
   _moveForward = ->
     return if is_walking
     is_walking = true
@@ -91,5 +73,33 @@ panoramaInit = ->
       if count != max
         setTimeout timeout, 500
     timeout()
+
+  ###
+    INIT
+  ###
+  # read panorama location
+  query = window.location.search.substring 1 # remove "?"
+  _param = query.split "&"
+  if _param.length > 1
+    for i in [ 0..._param.length ]
+      element = _param[ i ].split "="
+      key = decodeURIComponent element[ 0 ]
+      value = decodeURIComponent element[ 1 ]
+      param[ key ] = value
+  else
+    window.location.href = "./"
+
+  panoramaManager.draw
+    latLng: new window.google.maps.LatLng param.lat, param.lng
+    heading: 270
+    pitch: 0
+
+  setTimeout ->
+    $( ".tutorial" ).addClass "show"
+
+    setTimeout ->
+      $( ".tutorial" ).addClass "hide"
+    , 5000
+  , 3000
 
 module.exports = panoramaInit

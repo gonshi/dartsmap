@@ -19,6 +19,10 @@ indexInit = ->
         opacity: 0
       , 300, -> $( ".qrCode_container" ).hide()
 
+      $( ".tutorial" ).addClass "show"
+      setTimeout (-> $( ".tutorial" ).addClass "hide" ), 5000
+
+
       dartsDataStore.on "push", ( e )->
         console.log e.value.message
         if e.value.message == "start"

@@ -17,3 +17,37 @@
 
     &.alt
       background-position: 0 (-$height)
+
+  .tutorial
+    display: none
+    position: absolute
+    +scale(0)
+
+    &.num0
+      $img: "tutorial/1.png"
+      +trbl( auto, auto, 400px, 50% )
+      +image-size($img)
+      margin-left: 60px
+      +transform-origin(bottom, left)
+
+      &.show
+        display: block
+        +animation(scaleIn 0.4s $easeOutBack 0s forwards)
+      &.hide
+        +scale(1)
+        +animation(hide 0.4s ease 0s forwards)
+
+    &.num1
+      $img: "tutorial/2.png"
+      +trbl( auto, auto, 350px, 50% )
+      +image-size($img)
+      margin-left: -380px
+      +transform-origin(bottom, right)
+
+      &.show
+        display: block
+        +animation(scaleIn 0.4s $easeOutBack 1s forwards)
+
+      &.hide
+        +scale(1)
+        +animation(hide 0.4s ease 0s forwards)

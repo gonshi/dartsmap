@@ -34,6 +34,13 @@ indexInit = ->
 
           is_started = true
 
+          $( ".map .target" ).css
+            top: target.top
+            left: target.left
+
+          target_top = $( ".map .goal" ).offset().top
+          target_left = $( ".map .goal" ).offset().left - 200
+
           # THROW ARROW
           $( ".chara" ).addClass "throw"
           $( ".map .name" ).text target.name

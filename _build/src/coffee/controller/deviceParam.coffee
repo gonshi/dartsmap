@@ -20,13 +20,13 @@ class DeviceParam extends EventDispatcher
         _checkAccel e
 
     window.addEventListener "deviceorientation", ( e )=>
+      @count += 1
+      $debug.text @count
       throttle.exec =>
-        @count += 1
         heading = e.webkitCompassHeading
         if heading < 0
           heading += 360
         heading += window.orientation
-        $debug.text "#{ heading } : #{ @count }"
 
         if abs( heading - @last_heading ) > 20
           @last_heading = heading

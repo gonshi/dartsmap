@@ -18,6 +18,9 @@ panoramaInit = ->
       _moveForward()
     else if e.value.message == "rotate"
       return if is_walking
+      console.log( panoramaManager.get( "pov" ).heading -
+      ( e.value.heading - last_heading ) )
+
       panoramaManager.setRotate(
         panoramaManager.get( "pov" ).heading -
         ( e.value.heading - last_heading ) )

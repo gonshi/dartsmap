@@ -11,6 +11,7 @@ class DeviceParam extends EventDispatcher
     throttle = new Throttle 100
     param = [ "x", "y", "z" ]
     abs = Math.abs
+    $debug = $( ".debug" )
 
     # LISTENER
     window.addEventListener "devicemotion", ( e )->
@@ -23,6 +24,7 @@ class DeviceParam extends EventDispatcher
         if heading < 0
           heading += 360
         heading += window.orientation
+        $heading.text heading
 
         if abs( heading - @last_heading ) > 20
           @last_heading = heading

@@ -13,13 +13,11 @@ panoramaInit = ->
   # milkcocoa LISTENER
   ## forward
   dartsDataStore.on "push", ( e )->
+    console.log e.value.message
     return if e.value.user_id != param.user_id
     if e.value.message = "walk"
       _moveForward()
     else if e.value.message == "rotate"
-      console.log( panoramaManager.get( "pov" ).heading -
-      ( e.value.heading - last_heading ) )
-
       return if is_walking
 
       panoramaManager.setRotate(

@@ -23,9 +23,10 @@ spInit = ->
       message: "walk"
 
   deviceParam.listen "ROTATE", ( heading )->
+    $( ".notice" ).text heading
     dartsDataStore.push
       user_id: user_id
-      message : "rotate"
+      message: "rotate"
       heading: heading
 
   # INIT

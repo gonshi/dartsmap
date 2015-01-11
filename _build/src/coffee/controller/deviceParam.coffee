@@ -36,7 +36,7 @@ class DeviceParam extends EventDispatcher
       for i in [ 0...3 ]
         if abs( e.acceleration[ param[ i ] ] ) > 50
           @dispatch "START", this
-        if abs( e.acceleration[ param[ i ] ] ) > 25
+        if abs( e.acceleration[ param[ i ] ] ) > 15
           @dispatch "WALK", this
 
 getInstance = ->

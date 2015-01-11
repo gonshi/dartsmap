@@ -16,7 +16,7 @@ class Throttle
     now = getNow()
     delta = now - @prevTime
 
-    clearTimeout( @timer )
+    clearTimeout @timer
     if delta >= @interval
       @prevTime = now
       callback()

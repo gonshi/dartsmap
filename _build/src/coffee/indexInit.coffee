@@ -1,3 +1,5 @@
+panoramaData = require "./model/panoramaData"
+
 indexInit = ->
   ###
     DECLARE
@@ -5,6 +7,7 @@ indexInit = ->
   user_id = Math.floor( Math.random() * 1000 )
   $arrow = $( ".arrow" )
   is_started = false
+  target = panoramaData[ Math.floor( Math.random() * panoramaData.length ) ]
 
   # preload
   preLoadImg = []
@@ -22,7 +25,7 @@ indexInit = ->
       setTimeout ->
         $( ".tutorial" ).addClass "show"
         setTimeout (-> $( ".tutorial" ).addClass "hide" ), 5000
-      , 3000
+      , 1500
 
       dartsDataStore.on "push", ( e )->
         if e.value.message == "start"
@@ -30,17 +33,14 @@ indexInit = ->
             return
 
           is_started = true
-          target_top = $( ".map .goal" ).offset().top
-          target_left = $( ".map .goal" ).offset().left - 200
-          # 200 = arrow width
-
 
           # THROW ARROW
           $( ".chara" ).addClass "throw"
+          $( ".map .name" ).text target.name
           $arrow.show().animate
             width: 200
-            top: target_top
-            left: target_left
+            top: target.top
+            left: target.left - 200 # 200 is arrow width
           , 800, "easeInQuad", ->
             $arrow.addClass "vibration"
             # ZOOM MAP
@@ -51,8 +51,8 @@ indexInit = ->
               $( ".map .name" ).show().addClass( "show" )
             , 2000
             setTimeout ->
-              window.location.href = "panorama.html?lat=21.273006&" +
-                                     "lng=-157.8236413&user_id=#{ user_id }"
+              window.location.href = "panorama.html?lat=#{ target.lat }&" +
+                                     "lng=#{ target.lng }&user_id=#{ user_id }"
             , 5000
 
   # INIT

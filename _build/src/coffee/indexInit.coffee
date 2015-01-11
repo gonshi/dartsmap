@@ -19,12 +19,12 @@ indexInit = ->
         opacity: 0
       , 300, -> $( ".qrCode_container" ).hide()
 
-      $( ".tutorial" ).addClass "show"
-      setTimeout (-> $( ".tutorial" ).addClass "hide" ), 5000
-
+      setTimeout ->
+        $( ".tutorial" ).addClass "show"
+        setTimeout (-> $( ".tutorial" ).addClass "hide" ), 5000
+      , 3000
 
       dartsDataStore.on "push", ( e )->
-        console.log e.value.message
         if e.value.message == "start"
           if is_started || parseInt( e.value.user_id ) != parseInt( user_id )
             return

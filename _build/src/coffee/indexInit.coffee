@@ -46,8 +46,8 @@ indexInit = ->
           $( ".map .name" ).text target.name
           $arrow.show().animate
             width: 200
-            top: target.top
-            left: target.left - 200 # 200 is arrow width
+            top: target_top
+            left: target_left
           , 800, "easeInQuad", ->
             $arrow.addClass "vibration"
             # ZOOM MAP

@@ -110,9 +110,17 @@
       background: #fff
       border-radius: 10px
 
-.debug
-  position: fixed
-  color: #000
-  background: #fff
-  font-size: 32px
-  z-index: 10
+.wrapper-sp
+  display: none
+  position: absolute
+  +trbl(0, 0, 0, 0)
+  width: 100vw
+  height: 100vh
+
+  .notice
+    display: table-cell
+    width: 100vw
+    height: 100vh
+    font-size: 56px 
+    text-align: center
+    vertical-align: middle 

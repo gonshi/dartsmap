@@ -6,14 +6,12 @@ class DeviceParam extends EventDispatcher
   constructor: ->
     super()
     @last_heading = 0
-    @count = 0
 
   exec: ->
     motionThrottle = new Throttle 100
     orientThrottle = new Throttle 100
     param = [ "x", "y", "z" ]
     abs = Math.abs
-    $debug = $( ".debug" )
 
     # LISTENER
     window.addEventListener "devicemotion", ( e )->
@@ -22,12 +20,10 @@ class DeviceParam extends EventDispatcher
 
     window.addEventListener "deviceorientation", ( e )=>
       orientThrottle.exec =>
-        @count += 1
         heading = e.webkitCompassHeading
         if heading < 0
           heading += 360
         heading += window.orientation
-        $debug.text "#{ heading } : #{ @count }"
 
         if abs( heading - @last_heading ) > 20
           @last_heading = heading

@@ -29,6 +29,9 @@ spInit = ->
       heading: heading
 
   # INIT
+  $( ".wrapper" ).hide()
+  $( ".wrapper-sp" ).show()
+
   deviceParam.exec()
 
   dartsDataStore.push

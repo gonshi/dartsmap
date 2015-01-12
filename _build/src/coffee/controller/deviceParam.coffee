@@ -45,14 +45,15 @@ class DeviceParam extends EventDispatcher
         low_passed_val = @last_acc[ param[ i ] ] * 0.9 +
         abs( e.accelerationIncludingGravity[ param[ i ] ] ) * 0.1
 
+        @last_acc[ param[ i ] ] = low_passed_val
+        if @last_acc[ param[ i ] ] > @max[ param[ i ] ]
+          @max[ param[ i ] ] = @last_acc[ param[ i ] ]
+
         if low_passed_val > @start_thr
           @dispatch "START", this
         if low_passed_val > @walk_thr
           @dispatch "WALK", this
           break
-        @last_acc[ param[ i ] ] = low_passed_val
-        if @last_acc[ param[ i ] ] > @max[ param[ i ] ]
-          @max[ param[ i ] ] = @last_acc[ param[ i ] ]
 
       $( ".notice" ).html "maxX: #{ @max.x.toFixed( 2 ) }<br>" +
                           "maxY: #{ @max.y.toFixed( 2 ) }<br>" +

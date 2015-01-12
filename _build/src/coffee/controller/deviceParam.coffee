@@ -15,6 +15,7 @@ class DeviceParam extends EventDispatcher
 
     # LISTENER
     window.addEventListener "devicemotion", ( e )->
+      alert e.acceleration[ "x" ]
       motionThrottle.exec ->
         _checkAccel e
 
@@ -33,8 +34,6 @@ class DeviceParam extends EventDispatcher
       PRIVATE
     ###
     _checkAccel = ( e )=>
-      alert "accel"
-      alert e.acceleration[ "x" ]
       for i in [ 0...3 ]
         if abs( e.acceleration[ param[ i ] ] ) > 50
           @dispatch "START", this

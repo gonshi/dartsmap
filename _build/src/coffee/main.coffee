@@ -38,6 +38,10 @@ $ ->
   else
     indexInit()
 
+window.isAndroid = ->
+  return window.navigator.userAgent.
+         toLowerCase().match /android/
+
 window.isSp = ->
   return window.navigator.userAgent.
          toLowerCase().match /android|ipad|iphone|ipad/

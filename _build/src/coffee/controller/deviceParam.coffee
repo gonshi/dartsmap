@@ -6,7 +6,6 @@ class DeviceParam extends EventDispatcher
   constructor: ->
     super()
     @ymax = 0
-    @zmax = 0
     if isAndroid()
       @start_thr = 30
       @walk_thr = 12
@@ -32,6 +31,9 @@ class DeviceParam extends EventDispatcher
       PRIVATE
     ###
     _checkAccel = ( e )=>
+      _abs = abs( e.accelerationIncludingGravity.y )
+      @ymax = _abs if _abs > @ymax
+      $( ".notice" ).text @ymax
       if abs( e.accelerationIncludingGravity.y ) > @start_thr
         @dispatch "START", this
       if abs( e.accelerationIncludingGravity.y ) > @walk_thr

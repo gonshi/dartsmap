@@ -33,6 +33,7 @@ class DeviceParam extends EventDispatcher
       PRIVATE
     ###
     _checkAccel = ( e )=>
+      $( ".notice" ).text e.acceleration[ "x" ]
       for i in [ 0...3 ]
         if abs( e.acceleration[ param[ i ] ] ) > 50
           @dispatch "START", this

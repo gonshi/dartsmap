@@ -5,10 +5,9 @@ instace = null
 class DeviceParam extends EventDispatcher
   constructor: ->
     super()
-    @last_heading = 0
     if isAndroid()
-      @start_thr = 20
-      @walk_thr = 6
+      @start_thr = 30
+      @walk_thr = 10
     else
       @start_thr = 40
       @walk_thr = 13
@@ -25,23 +24,14 @@ class DeviceParam extends EventDispatcher
         _checkAccel e
 
     window.addEventListener "deviceorientation", ( e )=>
-      $( ".notice" ).text e.alpha
-      ###
       orientThrottle.exec =>
-        heading = e.webkitCompassHeading
-        if heading < 0
-          heading += 360
-        heading += window.orientation
-
-        if abs( heading - @last_heading ) > 20
-          @last_heading = heading
-          @dispatch "ROTATE", this, -heading
-      ###
+        @dispatch "ROTATE", this, -e.alpha
 
     ###
       PRIVATE
     ###
     _checkAccel = ( e )=>
+      $( ".notice" ).text abs( e.accelerationIncludingGravity.x  )
       for i in [ 0...3 ]
         if abs( e.accelerationIncludingGravity[ param[ i ] ] ) > @start_thr
           @dispatch "START", this

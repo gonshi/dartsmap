@@ -7,8 +7,8 @@ class DeviceParam extends EventDispatcher
     super()
     @ymax = 0
     if isAndroid()
-      @start_thr = 30
-      @walk_thr = 12
+      @start_thr = 15
+      @walk_thr = 7
     else
       @start_thr = 45
       @walk_thr = 15

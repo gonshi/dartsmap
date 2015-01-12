@@ -55,7 +55,7 @@ class DeviceParam extends EventDispatcher
           @max[ param[ i ] ] = @last_acc[ param[ i ] ]
 
       $( ".notice" ).html "maxX: #{ @max.x }<br>maxY: #{ @max.y }<br>" +
-                          "maxZ: #{ @max.z }" +
+                          "maxZ: #{ @max.z }<br>" +
                           "x:#{ @last_acc.x }<br>y:#{ @last_acc.y }<br>" +
                           "z:#{ @last_acc.z }"
 

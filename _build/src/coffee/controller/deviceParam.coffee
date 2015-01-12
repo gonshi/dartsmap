@@ -6,8 +6,8 @@ class DeviceParam extends EventDispatcher
   constructor: ->
     super()
     if isAndroid()
-      @start_thr = 30
-      @walk_thr = 10
+      @start_thr = 40
+      @walk_thr = 40
     else
       @start_thr = 40
       @walk_thr = 13

@@ -15,8 +15,12 @@ class DeviceParam extends EventDispatcher
       y: 0
       z: 0
 
-    @start_thr = 12
-    @walk_thr = 10
+    if isAndroid()
+      @start_thr = 16
+      @walk_thr = 12
+    else
+      @start_thr = 12
+      @walk_thr = 10
 
   exec: ->
     motionThrottle = new Throttle 100
@@ -38,8 +42,8 @@ class DeviceParam extends EventDispatcher
     _checkAccel = ( e )=>
       param = [ "x", "y", "z" ]
       for i in [ 0...param.length ]
-        low_passed_val = @last_acc[ param[ i ] ] * 0.95 +
-        abs( e.accelerationIncludingGravity[ param[ i ] ] ) * 0.05
+        low_passed_val = @last_acc[ param[ i ] ] * 0.9 +
+        abs( e.accelerationIncludingGravity[ param[ i ] ] ) * 0.1
 
         @last_acc[ param[ i ] ] = low_passed_val
         if @last_acc[ param[ i ] ] > @max[ param[ i ] ]

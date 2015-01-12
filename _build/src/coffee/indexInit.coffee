@@ -8,7 +8,7 @@ indexInit = ->
   $arrow = $( ".arrow" )
   is_started = false
   target = panoramaData[ Math.floor( Math.random() * panoramaData.length ) ]
-  if window.DEBUG
+  if window.DEBUG.state
     $( ".qrCode_container" ).hide()
     $( ".map .target" ).show()
     target = panoramaData[ 6 ]
@@ -84,7 +84,7 @@ indexInit = ->
     alt: "QRコード"
   $qrCodeImg.appendTo ".qrCode"
 
-  if window.DEBUG
+  if window.DEBUG.state
     window.test = ->
       $( ".map .target" ).css
         top: target.top

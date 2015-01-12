@@ -15,7 +15,6 @@ class DeviceParam extends EventDispatcher
 
     # LISTENER
     window.addEventListener "devicemotion", ( e )->
-      alert e.accelerationIncludingGravity
       motionThrottle.exec ->
         _checkAccel e
 
@@ -34,10 +33,11 @@ class DeviceParam extends EventDispatcher
       PRIVATE
     ###
     _checkAccel = ( e )=>
+      $( ".notice" ).text e.accelerationIncludingGravity.x
       for i in [ 0...3 ]
-        if abs( e.acceleration[ param[ i ] ] ) > 50
+        if abs( e.accelerationIncludingGravity[ param[ i ] ] ) > 50
           @dispatch "START", this
-        if abs( e.acceleration[ param[ i ] ] ) > 15
+        if abs( e.accelerationIncludingGravity[ param[ i ] ] ) > 15
           @dispatch "WALK", this
 
 getInstance = ->

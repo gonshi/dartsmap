@@ -27,7 +27,7 @@ class DeviceParam extends EventDispatcher
 
     window.addEventListener "deviceorientation", ( e )=>
       orientThrottle.exec =>
-        @dispatch "ROTATE", this, -e.alpha
+        @dispatch "ROTATE", this, e.alpha
 
     ###
       PRIVATE

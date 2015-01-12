@@ -11,7 +11,7 @@ class DeviceParam extends EventDispatcher
       @isAndroid = true
     else
       @start_thr = 45
-      @walk_thr = 15
+      @walk_thr = 12
       @isAndroid = false
 
   exec: ->
@@ -39,6 +39,7 @@ class DeviceParam extends EventDispatcher
         if abs( e.accelerationIncludingGravity.y ) > @walk_thr
           @dispatch "WALK", this
       else
+        $( ".notice" ).text "iphone"
         for i in [ 0...param.length ]
           if abs( e.accelerationIncludingGravity[ param[ i ] ] ) > @start_thr
             @dispatch "START", this

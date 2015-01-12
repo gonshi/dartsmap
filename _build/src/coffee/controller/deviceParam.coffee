@@ -7,7 +7,7 @@ class DeviceParam extends EventDispatcher
     super()
     if isAndroid()
       @start_thr = 21
-      @walk_thr = 7
+      @walk_thr = 9
       @isAndroid = true
     else
       @start_thr = 45
@@ -34,7 +34,6 @@ class DeviceParam extends EventDispatcher
     _checkAccel = ( e )=>
       param = [ "x", "y", "z "]
       if @isAndroid
-        $( ".notice" ).text "android"
         if abs( e.accelerationIncludingGravity.y ) > @start_thr
           @dispatch "START", this
         if abs( e.accelerationIncludingGravity.y ) > @walk_thr

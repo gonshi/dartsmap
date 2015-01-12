@@ -31,7 +31,10 @@ class DeviceParam extends EventDispatcher
       PRIVATE
     ###
     _checkAccel = ( e )=>
-      $( ".notice" ).text abs( e.accelerationIncludingGravity.x  )
+      $( ".notice" ).text "y: " +
+                          "#{ abs( e.accelerationIncludingGravity.y ) }<br>" +
+                          "z: " +
+                          "#{ abs( e.accelerationIncludingGravity.z ) }"
       for i in [ 0...3 ]
         if abs( e.accelerationIncludingGravity[ param[ i ] ] ) > @start_thr
           @dispatch "START", this

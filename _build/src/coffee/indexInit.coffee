@@ -14,6 +14,7 @@ indexInit = ->
   preLoadImg[ 0 ] = new Image()
   preLoadImg[ 0 ].src = "img/arrow.png"
 
+  console.log target.name
   # milkcocoa LISTENER
   dartsDataStore.on "push", ( e )->
     if e.value.message == "init" && parseInt(
@@ -38,21 +39,24 @@ indexInit = ->
             top: target.top
             left: target.left
 
-          target_top = $( ".map .target" ).offset().top
-          target_left = $( ".map .target" ).offset().left - 200
+          target_offsetTop = $( ".map .target" ).offset().top
+          target_offsetLeft = $( ".map .target" ).offset().left - 200
 
           # THROW ARROW
           $( ".chara" ).addClass "throw"
-          $( ".map .name" ).text target.name
+          $( ".map .name" ).text( target.name ).css
+            top: target.top - 60
+            left: target.left
+
           $arrow.show().animate
             width: 200
-            top: target_top
-            left: target_left
+            top: target_offsetTop
+            left: target_offsetLeft
           , 800, "easeInQuad", ->
             $arrow.addClass "vibration"
             # ZOOM MAP
             setTimeout ->
-              $( ".wrapper" ).css transform: "scale( 2.0 )"
+              $( ".wrapper" ).css transform: "scale(2.0)"
             , 1000
             setTimeout ->
               $( ".map .name" ).show().addClass( "show" )

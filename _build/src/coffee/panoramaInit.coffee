@@ -57,7 +57,7 @@ panoramaInit = ->
     else if nearestLink.heading < -180
       nearestLink.heading = nearestLink.heading + 360
 
-    panoramaManager.rotateTo nearestLink.heading, 0
+    panoramaManager.setRotate nearestLink.heading, 0
     _walkAnimation()
 
   # WALK ANIMATION

@@ -1,24 +1,30 @@
 .wrapper
   position: absolute
-  +trbl( 0, 0, 0, 0 )
+  +trbl(0, 0, 0, 0)
   min-width: 800px
   min-height: $minHeight 
-  +transform-origin(calc( 100% - 200px ) 350px 0)
+  +transform-origin(calc(100% - 350px), 350px)
   +transition(transform 1s ease 0s)
 
   .ttl
     position: absolute
-    +trbl( 20px, 0, auto, 0 )
+    +trbl(20px, 0, auto, 0)
     text-align: center
     font-size: 64px
     color: #fff
     text-shadow: 2px 0px 0px #4d4d4d, -1.74661px -0.97435px 0px #4d4d4d, 1.05064px 1.70181px 0px #4d4d4d, -0.08846px -1.99804px 0px #4d4d4d, -0.89615px 1.78799px 0px #4d4d4d, 1.65367px -1.12488px 0px #4d4d4d, -1.99218px 0.17674px 0px #4d4d4d, 1.82588px 0.81619px 0px #4d4d4d, -1.19692px -1.60231px 0px #4d4d4d, 0.26467px 1.98241px 0px #4d4d4d, 0.73464px -1.86019px 0px #4d4d4d, -1.5478px 1.26662px 0px #4d4d4d, 1.96876px -0.35209px 0px #4d4d4d, -1.89086px -0.65165px 0px #4d4d4d, 1.33383px 1.49027px 0px #4d4d4d, -0.43882px -1.95127px 0px #4d4d4d, -0.56738px 1.91783px 0px #4d4d4d
 
   .map
+    $img: "map.jpg"
     position: absolute
     +trbl(50%, 100px, auto, auto)
-    +image-size("map.jpg")
+    width: image-width($img) + 150px
+    height: image-height($img)
     margin-top: -200px
+
+    img
+      width: image-width($img)
+      height: auto
 
     .name
       display: none
@@ -29,12 +35,13 @@
       border: solid 3px #000
       border-radius: 10px
       font-size: 16px
+      +translateX(-50%)
 
       &:after
         position: absolute
-        +trbl(auto, 0, -14px, 0)
-        width: 20px
-        height: 20px
+        +trbl(auto, 0, -11px, 0)
+        width: 15px
+        height: 15px
         margin: auto
         background: #fff
         border-bottom: solid 3px #000
@@ -53,7 +60,7 @@
     $num: 2
     $height: image-height($img) / $num
     position: absolute
-    +trbl( 50%, auto, auto, 50px )
+    +trbl(50%, auto, auto, 50px)
     width: image-width($img)
     height: $height 
     margin-top: -200px
@@ -84,12 +91,12 @@
   .arrow
     display: none
     position: absolute
-    +trbl( 0, auto, auto, 0 )
+    +trbl(0, auto, auto, 0)
     width: 100px
-    +transform-origin( 100% 10px 0 )
+    +transform-origin(100%, 10px)
 
     &.vibration
-      +animation( vibration 0.6s ease 0s )
+      +animation(vibration 0.6s ease 0s)
 
     img
       width: 100%
@@ -98,6 +105,7 @@
     qr code
   /*-----------------
   .qrCode_container
+    display: none
     position: fixed
     +trbl(0, 0, 0, 0)
     background: rgba(0, 0, 0, 0.8)

@@ -15,3 +15,17 @@
     +scale(0)
   100%
     +scale(1)
+
++keyframes(vibration)
+  @for $i from 0 through 10
+    #{$i*10}%
+      $deg: (2 * ($i % 2) - 1) * 4 * (5 - floor($i / 2))
+      +rotate(#{$deg}deg)
+
++keyframes(slideDown)
+  0%
+    opacity: 0
+    margin-top: -20px
+  100%
+    opacity: 1 
+    margin-top: 0

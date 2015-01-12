@@ -8,13 +8,15 @@ indexInit = ->
   $arrow = $( ".arrow" )
   is_started = false
   target = panoramaData[ Math.floor( Math.random() * panoramaData.length ) ]
+  if window.DEBUG
+    $( ".qrCode_container" ).hide()
+    target = panoramaData[ 6 ]
 
   # preload
   preLoadImg = []
   preLoadImg[ 0 ] = new Image()
   preLoadImg[ 0 ].src = "img/arrow.png"
 
-  console.log target.name
   # milkcocoa LISTENER
   dartsDataStore.on "push", ( e )->
     if e.value.message == "init" && parseInt(
@@ -62,9 +64,13 @@ indexInit = ->
               $( ".map .name" ).show().addClass( "show" )
             , 2000
             setTimeout ->
-              window.location.href = "panorama.html?lat=#{ target.lat }&" +
-                                     "lng=#{ target.lng }&user_id=#{ user_id }"
-            , 5000
+              $( ".wrapper" ).animate
+                opacity: 0
+              , 1500, ->
+                window.location.href = "panorama.html?lat=#{ target.lat }&" +
+                                       "lng=#{ target.lng }&" +
+                                       "user_id=#{ user_id }"
+            , 3000
 
   # INIT
   $arrow.css
@@ -76,5 +82,41 @@ indexInit = ->
           "#{ window.location.href }?user_id=#{ user_id }",
     alt: "QRコード"
   $qrCodeImg.appendTo ".qrCode"
+
+  if window.DEBUG
+    window.test = ->
+      $( ".map .target" ).css
+        top: target.top
+        left: target.left
+
+      target_offsetTop = $( ".map .target" ).offset().top - 20
+      target_offsetLeft = $( ".map .target" ).offset().left - 198
+
+      # THROW ARROW
+      $( ".chara" ).addClass "throw"
+      $( ".map .name" ).text( target.name ).css
+        top: target.top - 70
+        left: target.left
+
+      $arrow.show().animate
+        width: 200
+        top: target_offsetTop
+        left: target_offsetLeft
+      , 800, "easeInQuad", ->
+        $arrow.addClass "vibration"
+        # ZOOM MAP
+        setTimeout ->
+          $( ".wrapper" ).css transform: "scale(2.0)"
+        , 1000
+        setTimeout ->
+          $( ".map .name" ).show().addClass( "show" )
+        , 2000
+        setTimeout ->
+          $( ".wrapper" ).animate
+            opacity: 0
+          , 1500, ->
+            window.location.href = "panorama.html?lat=#{ target.lat }&" +
+                                    "lng=#{ target.lng }&user_id=#{ user_id }"
+        , 3000
 
 module.exports = indexInit

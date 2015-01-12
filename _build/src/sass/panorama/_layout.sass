@@ -51,3 +51,14 @@
       &.hide
         +scale(1)
         +animation(hide 0.4s ease 0s forwards)
+
+  .back
+    position: absolute
+    +image-size("back.png")
+    +trbl(auto, 20px, 20px, auto)
+    +transition(transform 0.2s ease 0s)
+
+    &:hover
+      +scale(1.05)
+    &:active
+      +scale(1.1)

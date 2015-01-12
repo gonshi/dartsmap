@@ -6,6 +6,7 @@ class DeviceParam extends EventDispatcher
   constructor: ->
     super()
     @last_heading = 0
+    @max = 0
 
   exec: ->
     motionThrottle = new Throttle 100
@@ -33,8 +34,11 @@ class DeviceParam extends EventDispatcher
       PRIVATE
     ###
     _checkAccel = ( e )=>
-      $( ".notice" ).text e.accelerationIncludingGravity.x
       for i in [ 0...3 ]
+        _abs = abs( e.accelerationIncludingGravity[ param[ i ] ] )
+        if _abs > @max
+          @max = _abs
+          $( ".notice" ).text @max
         if abs( e.accelerationIncludingGravity[ param[ i ] ] ) > 50
           @dispatch "START", this
         if abs( e.accelerationIncludingGravity[ param[ i ] ] ) > 15

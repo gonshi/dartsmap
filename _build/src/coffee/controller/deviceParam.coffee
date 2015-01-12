@@ -15,7 +15,7 @@ class DeviceParam extends EventDispatcher
 
     # LISTENER
     window.addEventListener "devicemotion", ( e )->
-      alert e.acceleration[ "x" ]
+      alert e.acceleration
       motionThrottle.exec ->
         _checkAccel e
 

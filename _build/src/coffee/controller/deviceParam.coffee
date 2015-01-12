@@ -34,12 +34,12 @@ class DeviceParam extends EventDispatcher
     _checkAccel = ( e )=>
       param = [ "x", "y", "z "]
       if @isAndroid
+        $( ".notice" ).text "android"
         if abs( e.accelerationIncludingGravity.y ) > @start_thr
           @dispatch "START", this
         if abs( e.accelerationIncludingGravity.y ) > @walk_thr
           @dispatch "WALK", this
       else
-        $( ".notice" ).text "iphone"
         for i in [ 0...param.length ]
           if abs( e.accelerationIncludingGravity[ param[ i ] ] ) > @start_thr
             @dispatch "START", this

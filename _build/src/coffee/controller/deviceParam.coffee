@@ -54,10 +54,12 @@ class DeviceParam extends EventDispatcher
         if @last_acc[ param[ i ] ] > @max[ param[ i ] ]
           @max[ param[ i ] ] = @last_acc[ param[ i ] ]
 
-      $( ".notice" ).html "maxX: #{ @max.x }<br>maxY: #{ @max.y }<br>" +
-                          "maxZ: #{ @max.z }<br>" +
-                          "x:#{ @last_acc.x }<br>y:#{ @last_acc.y }<br>" +
-                          "z:#{ @last_acc.z }"
+      $( ".notice" ).html "maxX: #{ @max.x.toFixed( 2 ) }<br>" +
+                          "maxY: #{ @max.y.toFixed( 2 ) }<br>" +
+                          "maxZ: #{ @max.z.toFixed( 2 ) }<br>" +
+                          "x:#{ @last_acc.x.toFixed( 2 ) }<br>" +
+                          "y:#{ @last_acc.y.toFixed( 2 ) }<br>" +
+                          "z:#{ @last_acc.z.toFixed( 2 ) }"
 
 getInstance = ->
   if !instance

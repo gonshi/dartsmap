@@ -42,8 +42,8 @@ indexInit = ->
             top: target.top
             left: target.left
 
-          target_offsetTop = $( ".map .target" ).offset().top
-          target_offsetLeft = $( ".map .target" ).offset().left - 200
+          target_offsetTop = $( ".map .target" ).offset().top - 20
+          target_offsetLeft = $( ".map .target" ).offset().left - 198
 
           # THROW ARROW
           $( ".chara" ).addClass "throw"

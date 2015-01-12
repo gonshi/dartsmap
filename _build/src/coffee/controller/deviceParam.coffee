@@ -16,11 +16,11 @@ class DeviceParam extends EventDispatcher
       z: 0
 
     if isAndroid()
-      @walk_thr = 9
-      @isAndroid = true
+      @start_thr = 8
+      @walk_thr = 4
     else
-      @start_thr = 45
-      @walk_thr = 12
+      @start_thr = 8
+      @walk_thr = 4
 
   exec: ->
     motionThrottle = new Throttle 100

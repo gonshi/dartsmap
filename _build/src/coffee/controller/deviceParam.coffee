@@ -5,13 +5,14 @@ instace = null
 class DeviceParam extends EventDispatcher
   constructor: ->
     super()
-    @ymax = 0
     if isAndroid()
       @start_thr = 20
       @walk_thr = 7
+      @isAndroid = true
     else
       @start_thr = 45
-      @walk_thr = 10
+      @walk_thr = 15
+      @isAndroid = false
 
   exec: ->
     motionThrottle = new Throttle 100
@@ -31,13 +32,19 @@ class DeviceParam extends EventDispatcher
       PRIVATE
     ###
     _checkAccel = ( e )=>
-      _abs = abs( e.accelerationIncludingGravity.y )
-      @ymax = _abs if _abs > @ymax
-      $( ".notice" ).text @ymax
-      if abs( e.accelerationIncludingGravity.y ) > @start_thr
-        @dispatch "START", this
-      if abs( e.accelerationIncludingGravity.y ) > @walk_thr
-        @dispatch "WALK", this
+      param = [ "x", "y", "z "]
+      if @isAndroid
+        if abs( e.accelerationIncludingGravity.y ) > @start_thr
+          @dispatch "START", this
+        if abs( e.accelerationIncludingGravity.y ) > @walk_thr
+          @dispatch "WALK", this
+      else
+        for i in [ 0...param.length ]
+          if abs( e.accelerationIncludingGravity[ param[ i ] ] ) > @start_thr
+            @dispatch "START", this
+          if abs( e.accelerationIncludingGravity[ param[ i ] ] ) > @walk_thr
+            @dispatch "WALK", this
+            break
 
 getInstance = ->
   if !instance

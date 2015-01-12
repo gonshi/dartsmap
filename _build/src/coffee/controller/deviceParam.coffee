@@ -17,7 +17,6 @@ class DeviceParam extends EventDispatcher
   exec: ->
     motionThrottle = new Throttle 100
     orientThrottle = new Throttle 100
-    param = [ "y", "z" ]
     abs = Math.abs
 
     # LISTENER
@@ -33,11 +32,10 @@ class DeviceParam extends EventDispatcher
       PRIVATE
     ###
     _checkAccel = ( e )=>
-      for i in [ 0...2 ]
-        if abs( e.accelerationIncludingGravity[ param[ i ] ] ) > @start_thr
-          @dispatch "START", this
-        if abs( e.accelerationIncludingGravity[ param[ i ] ] ) > @walk_thr
-          @dispatch "WALK", this
+      if abs( e.accelerationIncludingGravity.y ) > @start_thr
+        @dispatch "START", this
+      if abs( e.accelerationIncludingGravity.y ) > @walk_thr
+        @dispatch "WALK", this
 
 getInstance = ->
   if !instance

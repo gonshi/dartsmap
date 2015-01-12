@@ -19,7 +19,7 @@ class DeviceParam extends EventDispatcher
       @start_thr = 16
       @walk_thr = 12
     else
-      @start_thr = 12
+      @start_thr = 10
       @walk_thr = 10
 
   exec: ->

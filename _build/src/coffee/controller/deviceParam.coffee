@@ -38,8 +38,8 @@ class DeviceParam extends EventDispatcher
     _checkAccel = ( e )=>
       param = [ "x", "y", "z" ]
       for i in [ 0...param.length ]
-        low_passed_val = @last_acc[ param[ i ] ] * 0.9 +
-        abs( e.accelerationIncludingGravity[ param[ i ] ] ) * 0.1
+        low_passed_val = @last_acc[ param[ i ] ] * 0.95 +
+        abs( e.accelerationIncludingGravity[ param[ i ] ] ) * 0.05
 
         @last_acc[ param[ i ] ] = low_passed_val
         if @last_acc[ param[ i ] ] > @max[ param[ i ] ]

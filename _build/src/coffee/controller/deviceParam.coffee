@@ -8,16 +8,16 @@ class DeviceParam extends EventDispatcher
     @ymax = 0
     @zmax = 0
     if isAndroid()
-      @start_thr = 40
-      @walk_thr = 40
+      @start_thr = 20
+      @walk_thr = 12
     else
-      @start_thr = 40
-      @walk_thr = 13
+      @start_thr = 45
+      @walk_thr = 15
 
   exec: ->
     motionThrottle = new Throttle 100
     orientThrottle = new Throttle 100
-    param = [ "x", "y", "z" ]
+    param = [ "y", "z" ]
     abs = Math.abs
 
     # LISTENER
@@ -33,15 +33,7 @@ class DeviceParam extends EventDispatcher
       PRIVATE
     ###
     _checkAccel = ( e )=>
-      _absy = abs e.accelerationIncludingGravity.y
-      _absz = abs e.accelerationIncludingGravity.z
-      if _absy > @ymax
-        @ymax = _absy
-      if _absz > @zmax
-        @zmax = _absz
-      $( ".notice" ).html "y: #{ @ymax }<br>z: #{ @zmax }"
-
-      for i in [ 0...3 ]
+      for i in [ 0...2 ]
         if abs( e.accelerationIncludingGravity[ param[ i ] ] ) > @start_thr
           @dispatch "START", this
         if abs( e.accelerationIncludingGravity[ param[ i ] ] ) > @walk_thr

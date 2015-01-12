@@ -8,6 +8,7 @@ class DeviceParam extends EventDispatcher
     @last_heading = 0
 
   exec: ->
+    alert "deviceparam"
     motionThrottle = new Throttle 100
     orientThrottle = new Throttle 100
     param = [ "x", "y", "z" ]
@@ -15,6 +16,7 @@ class DeviceParam extends EventDispatcher
 
     # LISTENER
     window.addEventListener "devicemotion", ( e )->
+      alert "devicemotion"
       motionThrottle.exec ->
         _checkAccel e
 

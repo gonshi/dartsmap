@@ -15,15 +15,16 @@ panoramaInit = ->
   dartsDataStore.on "push", ( e )->
     return if e.value.user_id != param.user_id
     if e.value.message == "walk"
+      return if is_walking
+      is_walking = true
+
       _moveForward()
       panoramaManager.draw
         panoId  : nearestLink.pano
         heading : nearestLink.heading
         pitch   : nearestLink.pitch
-      is_walking = false
     else if e.value.message == "rotate"
       return if is_walking
-
       panoramaManager.setRotate(
         panoramaManager.get( "pov" ).heading -
         ( e.value.heading - last_heading ) )
@@ -33,9 +34,6 @@ panoramaInit = ->
     PRIVATE
   ###
   _moveForward = ->
-    return if is_walking
-    is_walking = true
-
     myHeading = panoramaManager.get( "pov" ).heading
     myHeading = myHeading + 360 if myHeading < 0
 
@@ -68,6 +66,8 @@ panoramaInit = ->
       count += 1
       if count != max
         setTimeout timeout, 500
+      else
+        is_walking = false
     timeout()
 
   ###

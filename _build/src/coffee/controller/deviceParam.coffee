@@ -11,7 +11,7 @@ class DeviceParam extends EventDispatcher
       @walk_thr = 7
     else
       @start_thr = 45
-      @walk_thr = 12
+      @walk_thr = 10
 
   exec: ->
     motionThrottle = new Throttle 100

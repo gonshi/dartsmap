@@ -5,7 +5,6 @@ spInit = ->
     DECLARE
   ###
   deviceParam = DeviceParam()
-  alert "spinit"
 
   # get ID
   query = window.location.search.substring 1

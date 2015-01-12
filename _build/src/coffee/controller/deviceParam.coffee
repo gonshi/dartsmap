@@ -8,7 +8,6 @@ class DeviceParam extends EventDispatcher
     @last_heading = 0
 
   exec: ->
-    alert "deviceparam"
     motionThrottle = new Throttle 100
     orientThrottle = new Throttle 100
     param = [ "x", "y", "z" ]
@@ -16,7 +15,6 @@ class DeviceParam extends EventDispatcher
 
     # LISTENER
     window.addEventListener "devicemotion", ( e )->
-      alert "devicemotion"
       motionThrottle.exec ->
         _checkAccel e
 
@@ -35,7 +33,8 @@ class DeviceParam extends EventDispatcher
       PRIVATE
     ###
     _checkAccel = ( e )=>
-      $( ".notice" ).text e.acceleration[ "x" ]
+      alert "accel"
+      alert e.acceleration[ "x" ]
       for i in [ 0...3 ]
         if abs( e.acceleration[ param[ i ] ] ) > 50
           @dispatch "START", this

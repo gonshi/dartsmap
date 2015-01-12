@@ -11,7 +11,7 @@ indexInit = ->
   if window.DEBUG.state
     $( ".qrCode_container" ).hide()
     $( ".map .target" ).css opacity: 1
-    target = panoramaData[ 6 ]
+    target = panoramaData[ 5 ]
 
   # preload
   preLoadImg = []

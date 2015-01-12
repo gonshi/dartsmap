@@ -16,6 +16,11 @@ panoramaInit = ->
     return if e.value.user_id != param.user_id
     if e.value.message == "walk"
       _moveForward()
+      panoramaManager.draw
+        panoId  : nearestLink.pano
+        heading : nearestLink.heading
+        pitch   : nearestLink.pitch
+      is_walking = false
     else if e.value.message == "rotate"
       return if is_walking
 
@@ -23,16 +28,6 @@ panoramaInit = ->
         panoramaManager.get( "pov" ).heading -
         ( e.value.heading - last_heading ) )
       last_heading = e.value.heading
-
-  # event listener
-  panoramaManager.listen "ROTATE_FIN", ()->
-    setTimeout ->
-      panoramaManager.draw
-        panoId  : nearestLink.pano
-        heading : nearestLink.heading
-        pitch   : nearestLink.pitch
-      is_walking = false
-    , 1000
 
   ###
     PRIVATE

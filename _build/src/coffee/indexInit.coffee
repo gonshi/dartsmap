@@ -10,7 +10,7 @@ indexInit = ->
   target = panoramaData[ Math.floor( Math.random() * panoramaData.length ) ]
   if window.DEBUG.state
     $( ".qrCode_container" ).hide()
-    $( ".map .target" ).show()
+    $( ".map .target" ).css opacity: 1
     target = panoramaData[ 6 ]
 
   # preload

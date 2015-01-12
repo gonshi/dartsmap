@@ -10,6 +10,11 @@ class DeviceParam extends EventDispatcher
       y: 0
       z: 0
 
+    @max =
+      x: 0
+      y: 0
+      z: 0
+
     if isAndroid()
       @walk_thr = 9
       @isAndroid = true
@@ -46,7 +51,12 @@ class DeviceParam extends EventDispatcher
           @dispatch "WALK", this
           break
         @last_acc[ param[ i ] ] = low_passed_val
-      $( ".notice" ).html "x:#{ @last_acc.x }<br>y:#{ @last_acc.y }<br>" +
+        if @last_acc[ param[ i ] ] > @max[ param[ i ] ]
+          @max[ param[ i ] ] = @last_acc[ param[ i ] ]
+
+      $( ".notice" ).html "maxX: #{ @max.x }<br>maxY: #{ @max.y }<br>" +
+                          "maxZ: #{ @max.z }" +
+                          "x:#{ @last_acc.x }<br>y:#{ @last_acc.y }<br>" +
                           "z:#{ @last_acc.z }"
 
 getInstance = ->

@@ -8,10 +8,12 @@ indexInit = ->
   $arrow = $( ".arrow" )
   is_started = false
   target = panoramaData[ Math.floor( Math.random() * panoramaData.length ) ]
+  ###
   if window.DEBUG.state
     $( ".qrCode_container" ).hide()
     $( ".map .target" ).css opacity: 1
     target = panoramaData[ 5 ]
+  ###
 
   # preload
   preLoadImg = []

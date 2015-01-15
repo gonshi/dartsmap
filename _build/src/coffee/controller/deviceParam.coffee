@@ -55,12 +55,14 @@ class DeviceParam extends EventDispatcher
           @dispatch "WALK", this
           break
 
+      ###
       $( ".notice" ).html "maxX: #{ @max.x.toFixed( 2 ) }<br>" +
                           "maxY: #{ @max.y.toFixed( 2 ) }<br>" +
                           "maxZ: #{ @max.z.toFixed( 2 ) }<br>" +
                           "x:#{ @last_acc.x.toFixed( 2 ) }<br>" +
                           "y:#{ @last_acc.y.toFixed( 2 ) }<br>" +
                           "z:#{ @last_acc.z.toFixed( 2 ) }"
+      ###
 
 getInstance = ->
   if !instance

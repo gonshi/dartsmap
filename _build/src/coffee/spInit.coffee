@@ -8,8 +8,6 @@ spInit = ->
 
   # get ID
   query = window.location.search.substring 1
-  element = query.split "="
-  user_id = decodeURIComponent element[ 1 ]
   
   # EVENT LISTENER
   deviceParam.listen "START", ->
@@ -32,10 +30,15 @@ spInit = ->
   $( ".wrapper" ).hide()
   $( ".wrapper-sp" ).show()
 
-  deviceParam.exec()
+  if query == ""
+    $( ".notice" ).html "まずはPCから<br>このサイトを開いてね！"
+  else
+    element = query.split "="
+    user_id = decodeURIComponent element[ 1 ]
+    deviceParam.exec()
 
-  dartsDataStore.push
-    user_id: user_id
-    message: "init"
+    dartsDataStore.push
+      user_id: user_id
+      message: "init"
 
 module.exports = spInit

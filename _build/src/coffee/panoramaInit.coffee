@@ -10,6 +10,10 @@ panoramaInit = ->
   nearestLink = {}
   param = {}
 
+  ###
+    EVENT LISTENER
+  ###
+ 
   # milkcocoa LISTENER
   ## forward
   dartsDataStore.on "push", ( e )->
@@ -29,6 +33,10 @@ panoramaInit = ->
         panoramaManager.get( "pov" ).heading -
         ( e.value.heading - last_heading ) )
       last_heading = e.value.heading
+
+  $( ".back" ).on "click", ( e )->
+    e.preventDefault()
+    window.location.replace "./?user_id=#{ param.user_id }"
 
   ###
     PRIVATE

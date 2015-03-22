@@ -33,7 +33,7 @@ indexInit = ->
 
     setTimeout ->
       $( ".tutorial" ).addClass "show"
-      setTimeout (-> $( ".tutorial" ).addClass "hide" ), 5000
+      setTimeout (-> $( ".tutorial" ).addClass "hide" ), 10000
     , 1500
 
     dartsDataStore.on "push", ( e )->

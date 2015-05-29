@@ -24,7 +24,7 @@ $ ->
   ###
     DECLARE
   ###
-  window.milkcocoa = new window.MilkCocoa "https://io-di2am3ahh.mlkcca.com:443"
+  window.milkcocoa = new window.MilkCocoa "io-di2am3ahh.mlkcca.com"
   window.dartsDataStore = milkcocoa.dataStore "darts"
 
   ###

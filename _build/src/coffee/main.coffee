@@ -24,7 +24,7 @@ $ ->
   ###
     DECLARE
   ###
-  window.milkcocoa = new window.MilkCocoa "io-di2am3ahh.mlkcca.com"
+  window.milkcocoa = new window.MilkCocoa "iceia90idbv.mlkcca.com"
   window.dartsDataStore = milkcocoa.dataStore "darts"
 
   ###

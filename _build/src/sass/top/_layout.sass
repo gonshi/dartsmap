@@ -2,7 +2,7 @@
   position: absolute
   +trbl(0, 0, 0, 0)
   min-width: 800px
-  min-height: $minHeight 
+  min-height: $minHeight
   +transform-origin(calc(100% - 230px), 350px)
   +transition(transform 1s ease 0s)
 
@@ -60,18 +60,18 @@
       opacity: 0
 
   .chara
-    $img: "chara.png" 
+    $img: "chara.png"
     $num: 2
     $height: image-height($img) / $num
     position: absolute
     +trbl(50%, auto, auto, 50px)
     width: image-width($img)
-    height: $height 
+    height: $height
     margin-top: -200px
     background-image: image-url($img)
 
     &.throw
-      background-position: 0 (-$height) 
+      background-position: 0 (-$height)
 
     .tutorial
       display: none
@@ -127,12 +127,12 @@
     .txt
       position: absolute
       +trbl(0, 0, 0, 0)
-      height: 1.5em
+      height: 4.5em
       margin: auto
       text-align: center
       color: #fff
       font-size: 32px
-      +translateY(-280px)
+      +translateY(-340px)
 
     .qrCode
       position: absolute
@@ -153,13 +153,13 @@
   display: none
   position: absolute
   +trbl(0, 0, 0, 0)
-  width: 640px 
+  width: 640px
   height: 100vh
 
   .notice
     display: table-cell
-    width: 640px 
+    width: 640px
     height: 100vh
-    font-size: 36px 
+    font-size: 36px
     text-align: center
-    vertical-align: middle 
+    vertical-align: middle

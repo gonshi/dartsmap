@@ -36,7 +36,7 @@ indexInit = ->
       setTimeout (-> $( ".tutorial" ).addClass "hide" ), 10000
     , 1500
 
-    dartsDataStore.on "push", ( e )->
+    dartsDataStore.on "send", ( e )->
       if e.value.message == "start"
         if is_started || parseInt( e.value.user_id ) != parseInt( user_id )
           return
@@ -80,9 +80,10 @@ indexInit = ->
 
 
   # milkcocoa LISTENER
-  dartsDataStore.on "push", ( e )->
-    if e.value.message == "init" && parseInt(
-      e.value.user_id ) == parseInt( user_id )
+  dartsDataStore.on "send", ( e )->
+    if e.value.message == "init" &&
+       parseInt( e.value.user_id ) == parseInt( user_id )
+
       _session_start()
 
   # INIT

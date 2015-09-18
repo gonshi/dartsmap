@@ -8,20 +8,20 @@ spInit = ->
 
   # get ID
   query = window.location.search.substring 1
-  
+
   # EVENT LISTENER
   deviceParam.listen "START", ->
-    dartsDataStore.push
+    dartsDataStore.send
       user_id: user_id
       message: "start"
 
   deviceParam.listen "WALK", ->
-    dartsDataStore.push
+    dartsDataStore.send
       user_id: user_id
       message: "walk"
 
   deviceParam.listen "ROTATE", ( heading )->
-    dartsDataStore.push
+    dartsDataStore.send
       user_id: user_id
       message: "rotate"
       heading: heading
@@ -37,7 +37,7 @@ spInit = ->
     user_id = decodeURIComponent element[ 1 ]
     deviceParam.exec()
 
-    dartsDataStore.push
+    dartsDataStore.send
       user_id: user_id
       message: "init"
 

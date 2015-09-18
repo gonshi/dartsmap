@@ -13,10 +13,10 @@ panoramaInit = ->
   ###
     EVENT LISTENER
   ###
- 
+
   # milkcocoa LISTENER
   ## forward
-  dartsDataStore.on "push", ( e )->
+  dartsDataStore.on "send", ( e )->
     return if e.value.user_id != param.user_id
     if e.value.message == "walk"
       return if is_walking

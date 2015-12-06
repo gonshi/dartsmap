@@ -1,14 +1,109 @@
 panoramaData = require "./model/panoramaData"
 
+docCookies =
+  getItem: (sKey) ->
+    if !sKey or !@hasItem(sKey)
+      return null
+    unescape document.cookie.replace(
+      new RegExp('(?:^|.*;\\s*)' + escape(sKey).replace(/[\-\.\+\*]/g, '\\$&') +
+      '\\s*\\=\\s*((?:[^;](?!;))*[^;]?).*'), '$1'
+    )
+  setItem: (sKey, sValue, vEnd, sPath, sDomain, bSecure) ->
+    if !sKey or /^(?:expires|max\-age|path|domain|secure)$/i.test(sKey)
+      return
+    sExpires = ''
+    if vEnd
+      switch vEnd.constructor
+        when Number
+          if vEnd == Infinity
+            sExpires = '; expires=Tue, 19 Jan 2038 03:14:07 GMT'
+          else
+            sExpires = '; max-age=' + vEnd
+        when String
+          sExpires = '; expires=' + vEnd
+        when Date
+          sExpires = '; expires=' + vEnd.toGMTString()
+    document.cookie = escape(sKey) + '=' + escape(sValue) + sExpires +
+                      (if sDomain then '; domain=' + sDomain else '') +
+                      (if sPath then '; path=' + sPath else '') +
+                      (if bSecure then '; secure' else '')
+    return
+  removeItem: (sKey, sPath) ->
+    if !sKey or !@hasItem(sKey)
+      return
+    document.cookie = escape(sKey) +
+                      '=; expires=Thu, 01 Jan 1970 00:00:00 GMT' +
+                      (if sPath then '; path=' + sPath else '')
+    return
+  hasItem: (sKey) ->
+    new RegExp(
+      '(?:^|;\\s*)' +
+      escape(sKey).replace(/[\-\.\+\*]/g, '\\$&') +
+      '\\s*\\='
+    ).test document.cookie
+  keys: ->
+    aKeys = document.cookie.replace(
+      /((?:^|\s*;)[^\=]+)(?=;|$)|^\s*|\s*(?:\=[^;]*)?(?:\1|$)/g, ''
+    ).split(/\s*(?:\=[^;]*)?;\s*/)
+    nIdx = 0
+    while nIdx < aKeys.length
+      aKeys[nIdx] = unescape(aKeys[nIdx])
+      nIdx++
+    aKeys
+
 indexInit = ->
+  _target_id = null
+  _target_history_list = []
+
+  # PRIVATE
+  _check_target_id = ->
+    for i in [0..._target_history_list.length]
+      if parseInt(_target_id) == parseInt(_target_history_list[i])
+        _target_id = (_target_id + 1) % panoramaData.length
+        _check_target_id()
+        break
+
   ###
     DECLARE
   ###
   user_id = Math.floor( Math.random() * 1000 )
   $arrow = $( ".arrow" )
   is_started = false
-  target = panoramaData[ Math.floor( Math.random() * panoramaData.length ) ]
+
+  # 一度出た国は続けて出ないようにする
+  _target_history = docCookies.getItem("target_history")
+  if _target_history
+    _target_history = _target_history.split ", "
+  else
+    _target_history = []
+
+  for i in [0..._target_history.length]
+    if _target_history[i] != "null"
+      _target_history_list.push _target_history[i]
+
+  if _target_history_list.length >= panoramaData.length
+    docCookies.removeItem "target_history"
+    location.reload()
+    return
+
+  # bubble sort
+  for i in [0..._target_history_list.length]
+    for j in [i + 1..._target_history_list.length]
+      if _target_history_list[j] < _target_history_list[i]
+        _tmp = _target_history_list[i]
+        _target_history_list[i] = _target_history_list[j]
+        _target_history_list[j] = _tmp
+
+  _target_id = Math.floor( Math.random() * panoramaData.length )
+
+  _check_target_id()
+
+  target = panoramaData[ _target_id ]
   param = {}
+
+  docCookies.setItem(
+    "target_history", "#{docCookies.getItem("target_history")}, #{_target_id}"
+  )
 
   ###
   if window.DEBUG.state

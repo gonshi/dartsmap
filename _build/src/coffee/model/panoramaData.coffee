@@ -28,13 +28,6 @@ panoramaData = [
     left: 162
   }
   {
-    name: "コロッセオ"
-    lat: 41.890095
-    lng: 12.492685
-    top: 144
-    left: 168
-  }
-  {
     name: "エッフェル塔"
     lat: 48.8563492
     lng: 2.2978396
